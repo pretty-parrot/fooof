@@ -85,6 +85,13 @@ def test_fooof_fit_nk_noise():
     assert tfm.has_model
 
 def test_fooof_fit_knee():
+    'Test various checks, errors and edge cases in FOOOF.\n    This tests all the input checking done in `_prepare_data`.\n    '
+    (xs, ys) = gen_power_spectrum([3, 50], [50, 2], [10, 0.5, 2])
+    tfm = FOOOF(verbose=False)
+    with raises(DataError):
+        tfm.fit(xs, ys.astype('complex'))
+    tfm.fit(xs, ys, [3, 40])
+    (xs, ys) = gen_power_spectrum([3, 50], [50, 2], [10, 0.5, 2])
     """Test FOOOF fit, with a knee."""
 
     ap_params = [50, 10, 1]
