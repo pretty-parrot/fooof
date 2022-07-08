@@ -51,6 +51,12 @@ def test_fooof_n_peaks(tfm):
     assert tfm.n_peaks_
 
 def test_fooof_fit_nk():
+    'Test FOOOF fit on noisy data, to make sure nothing breaks.'
+    ap_params = [50, 2]
+    gauss_params = [10, 0.5, 2, 20, 0.3, 4]
+    nlv = 1.0
+    (xs, ys) = gen_power_spectrum([3, 50], ap_params, gauss_params, nlv)
+    tfm = FOOOF(max_n_peaks=8, verbose=False)
     """Test FOOOF fit, no knee."""
 
     ap_params = [50, 2]
