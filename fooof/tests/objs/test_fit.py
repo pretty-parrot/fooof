@@ -51,12 +51,6 @@ def test_fooof_n_peaks(tfm):
     assert tfm.n_peaks_
 
 def test_fooof_fit_nk():
-    'Test FOOOF fit on noisy data, to make sure nothing breaks.'
-    ap_params = [50, 2]
-    gauss_params = [10, 0.5, 2, 20, 0.3, 4]
-    nlv = 1.0
-    (xs, ys) = gen_power_spectrum([3, 50], ap_params, gauss_params, nlv)
-    tfm = FOOOF(max_n_peaks=8, verbose=False)
     """Test FOOOF fit, no knee."""
 
     ap_params = [50, 2]
@@ -91,13 +85,6 @@ def test_fooof_fit_nk_noise():
     assert tfm.has_model
 
 def test_fooof_fit_knee():
-    'Test various checks, errors and edge cases in FOOOF.\n    This tests all the input checking done in `_prepare_data`.\n    '
-    (xs, ys) = gen_power_spectrum([3, 50], [50, 2], [10, 0.5, 2])
-    tfm = FOOOF(verbose=False)
-    with raises(DataError):
-        tfm.fit(xs, ys.astype('complex'))
-    tfm.fit(xs, ys, [3, 40])
-    (xs, ys) = gen_power_spectrum([3, 50], [50, 2], [10, 0.5, 2])
     """Test FOOOF fit, with a knee."""
 
     ap_params = [50, 10, 1]
